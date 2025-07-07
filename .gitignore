@@ -1,3 +1,4 @@
 /target
 .gitignore
 LICENSE
+Cargo.lock
