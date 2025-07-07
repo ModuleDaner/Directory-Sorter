@@ -1,7 +1,2 @@
 
-*
-
-!src/
-!src/**
-
-!.gitignore
+/target
