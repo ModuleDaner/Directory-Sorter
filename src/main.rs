@@ -3,12 +3,15 @@ use std::io;
 use std::path::Path;
 use once_cell::sync::Lazy;
 
-const PATHSTRING: &str = "/home/daner/Desktop/test";
+const PATHSTRING: &str = "hi";
 static PATH: Lazy<&Path> = Lazy::new(|| Path::new(PATHSTRING));
 
 fn main() -> io::Result<()> {
     if !PATH.is_dir() {
-        return Ok(());
+        return Err(io::Error::new(
+            io::ErrorKind::NotADirectory,
+            format!("The path '{}' is not a directory.", PATHSTRING),
+        ));
     };
 
     match fs::read_dir(*PATH) {
