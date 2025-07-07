@@ -1,11 +1,10 @@
-
-
 use std::fs;
 use std::io;
 use std::path::Path;
 use once_cell::sync::Lazy;
 
-static PATH: Lazy<&Path> = Lazy::new(|| Path::new("/home/daner/Desktop/test"));
+const PATHSTRING: &str = "/home/daner/Desktop/test";
+static PATH: Lazy<&Path> = Lazy::new(|| Path::new(PATHSTRING));
 
 fn main() -> io::Result<()> {
     if !PATH.is_dir() {
@@ -24,17 +23,9 @@ fn main() -> io::Result<()> {
                         let letter = _entry.file_name().to_string_lossy().chars().next().unwrap_or('_').to_uppercase();
                         let filename = entrypath.file_name().unwrap().to_string_lossy();
 
-                        let new_dir_path = format!("{:?}/{}/{:?}", parent_dir_path, letter, filename);
+                        let new_dir_path = format!("{}/{}/{}", parent_dir_path, letter, filename);
                         
-                        fs::create_dir_all(format!("{:?}/{}", parent_dir_path, letter))?;
-
-                        println!("{}", actual_dir_path);
-                        println!("{}", parent_dir_path);
-                        println!("{}", letter);
-                        println!("{}", filename);
-                        println!("{}", new_dir_path);
-                        println!("{}", "------------------------------------------------------------");
-                        
+                        fs::create_dir_all(format!("{}/{}", parent_dir_path, letter))?;
                         fs::rename(actual_dir_path, new_dir_path)?;
                     },
                     Err(e) => eprintln!("Error reading entry: {}", e),
