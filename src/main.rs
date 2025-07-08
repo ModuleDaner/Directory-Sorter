@@ -3,7 +3,7 @@ use std::io;
 use std::path::Path;
 use std::sync::LazyLock;
 
-const PATHSTRING: &str = "/home/daner/Desktop/test/";
+const PATHSTRING: &'static str = "/home/daner/Desktop/test/";
 static PATH: LazyLock<&'static Path> = LazyLock::new(|| Path::new(PATHSTRING));
 
 fn main() -> io::Result<()> {
