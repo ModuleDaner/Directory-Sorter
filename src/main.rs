@@ -1,10 +1,10 @@
 use std::fs;
 use std::io;
 use std::path::Path;
-use once_cell::sync::Lazy;
+use std::sync::LazyLock;
 
-const PATHSTRING: &str = "hi";
-static PATH: Lazy<&Path> = Lazy::new(|| Path::new(PATHSTRING));
+const PATHSTRING: &str = "/home/daner/Desktop/test/";
+static PATH: LazyLock<&'static Path> = LazyLock::new(|| Path::new(PATHSTRING));
 
 fn main() -> io::Result<()> {
     if !PATH.is_dir() {
